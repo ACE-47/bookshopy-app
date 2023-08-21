@@ -53,8 +53,8 @@ app.*.map.json
 /web
 /windows
 /test
-.metadate
-analysis_options.yaml
-bookshopy_app.iml
-pubspec.loock
-pubspec.yaml
+/.metadate
+/analysis_options.yaml
+/bookshopy_app.iml
+/pubspec.loock
+/pubspec.yaml
