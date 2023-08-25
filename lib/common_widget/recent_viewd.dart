@@ -20,6 +20,7 @@ class RecentViewd extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SizedBox(
+        width: size.width * 0.32,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,18 +38,23 @@ class RecentViewd extends StatelessWidget {
                           blurRadius: 5)
                     ]),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    img,
-                    fit: BoxFit.cover,
-                    height: size.width * 0.45,
-                    width: size.width * 0.3,
-                  ),
-                )),
+                    borderRadius: BorderRadius.circular(15),
+                    child: img.isEmpty
+                        ? Image.asset(
+                            "assets/img/10.jpg",
+                            fit: BoxFit.cover,
+                            height: size.width * 0.45,
+                            width: size.width * 0.3,
+                          )
+                        : Image.network(
+                            img,
+                            fit: BoxFit.cover,
+                            height: size.width * 0.45,
+                            width: size.width * 0.3,
+                          ))),
             const SizedBox(height: 10),
             Text(
               name,
-              // maxLines: 3,
               softWrap: true,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,

@@ -4,6 +4,8 @@ import 'package:bookshopy_app/screens/home/home_screen.dart';
 import 'package:bookshopy_app/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../cart/cart_screen.dart';
+
 class MainTabScreen extends StatefulWidget {
   static const routeName = '/main-tab';
   const MainTabScreen({super.key});
@@ -165,10 +167,10 @@ class _MainTabScreenState extends State<MainTabScreen>
       ),
       backgroundColor: Colors.white,
       body: TabBarView(controller: controller, children: [
-        HomeScreen(),
+        const HomeScreen(),
         const SearchScreen(),
         Container(),
-        Container(),
+        CartScreen(),
       ]),
       bottomNavigationBar: BottomAppBar(
           color: TColor.primary,

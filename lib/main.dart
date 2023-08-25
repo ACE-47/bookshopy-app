@@ -1,9 +1,9 @@
-import 'package:bookshopy_app/screens/product_details/product_detail_screen.dart';
+// import 'package:bookshopy_app/screens/cart/cart_screen.dart';
+import 'package:bookshopy_app/provider/author.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/provider/products.dart';
 import '/routes.dart';
-import '/screens/author/author_screen.dart';
 
 import 'screens/onboard/onboarding_screen.dart';
 
@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => Products(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Authors(),
         )
       ],
       child: MaterialApp(
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
             ),
             // useMaterial3: true,
           ),
-          initialRoute: ProductDetailScreen.routeName,
+          // initialRoute: CartScreen.routeName,
           routes: routes,
           home: const OnBoardingScreen()),
     );

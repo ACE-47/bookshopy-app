@@ -3,32 +3,23 @@ import 'package:bookshopy_app/common_widget/best_seller_cell.dart';
 import 'package:bookshopy_app/common_widget/gener_cell.dart';
 import 'package:bookshopy_app/common_widget/recent_viewd.dart';
 import 'package:bookshopy_app/common_widget/top_pics_cell.dart';
+import 'package:bookshopy_app/provider/products.dart';
+import 'package:bookshopy_app/screens/product_details/product_detail_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../main_tab/main_tab_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
-  final List topPicksArr = [
-    {
-      "name": "The Dissapearance of Emila Zola",
-      "author": "Michael Rosen",
-      "img": "assets/img/1.jpg"
-    },
-    {
-      "name": "Fatherhood",
-      "author": "Marcus Berkmann",
-      "img": "assets/img/2.jpg"
-    },
-    {
-      "name": "The Time Travellers Handbook",
-      "author": "Stride Lottie",
-      "img": "assets/img/3.jpg"
-    }
-  ];
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  // final List topPicksArr = [
   final List bestArr = [
     {
       "name": "Fatherhood",
@@ -84,8 +75,22 @@ class HomeScreen extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    Provider.of<Products>(context, listen: false).fetchAndSetFrontProducts();
+    Provider.of<Products>(context, listen: false).fetchAndSetProducts();
+
+    // Provider.of<Authors>(context, listen: false).fetchAndSetAuthors();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final topPicksArr = Provider.of<Products>(context).frontItems;
+    final recentViewd =
+        Provider.of<Products>(context, listen: false).recentAdded;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -155,10 +160,17 @@ class HomeScreen extends StatelessWidget {
                             viewportFraction: 0.4,
                             enlargeStrategy: CenterPageEnlargeStrategy.scale),
                         itemCount: topPicksArr.length,
-                        itemBuilder: (context, index, realIndex) => TopPicsCell(
-                            img: topPicksArr[index]['img'],
-                            name: topPicksArr[index]['name'],
-                            author: topPicksArr[index]['author'])),
+                        itemBuilder: (context, index, realIndex) =>
+                            GestureDetector(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  ProductDetailScreen.routeName,
+                                  arguments: topPicksArr[index].id),
+                              child: TopPicsCell(
+                                img: topPicksArr[index].imageUrl[0]['image'],
+                                name: topPicksArr[index].title,
+                                author: topPicksArr[index].author['name'],
+                              ),
+                            )),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -242,11 +254,18 @@ class HomeScreen extends StatelessWidget {
                     height: size.height * 0.35,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: bestArr.length,
-                        itemBuilder: (context, index) => RecentViewd(
-                            img: recentArr[index]['img'],
-                            name: recentArr[index]['name'],
-                            author: recentArr[index]['author'])),
+                        itemCount: recentViewd.length,
+                        itemBuilder: (context, index) => GestureDetector(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  ProductDetailScreen.routeName,
+                                  arguments: recentViewd[index].id),
+                              child: RecentViewd(
+                                  img: recentViewd[index].imageUrl.isEmpty
+                                      ? ''
+                                      : recentViewd[index].imageUrl[0]['image'],
+                                  name: recentViewd[index].title,
+                                  author: recentViewd[index].author['name']),
+                            )),
                   ),
                 ],
               )

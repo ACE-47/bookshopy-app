@@ -25,20 +25,22 @@ class Authors with ChangeNotifier {
   }
 
   Future<void> fetchAndSetAuthors() async {
-    Uri url = Uri.parse('http://10.21.140.237:8000/store/authors/');
+    Uri url = Uri.parse('http://10.23.154.10:8000/store/authors/');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;
+      print(response.body);
       final List<Author> loadedData = [];
       extractedData
           .map((author) => loadedData.add(Author(
-                id: author['author']['id'],
-                name: author['author']['title'],
-                about: author['author']['about'],
-                birthDate: DateTime.parse(author['author']['birth_date']),
-                imageUrl: author['author']['author_image'],
+                id: author['id'],
+                name: author['name'],
+                about: author['about'],
+                birthDate: DateTime.parse(author['birth_date']),
+                imageUrl: author['author_image'],
               )))
           .toList();
+      print(loadedData[0].name);
       _authors = loadedData;
       notifyListeners();
     } catch (error) {

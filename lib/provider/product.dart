@@ -5,7 +5,7 @@ class Product {
   final String description;
   final List<dynamic> imageUrl; // change it idiot
   final int collection; // change it idiot
-  final int author; // change it idiot
+  final Map<String, dynamic> author; // change it idiot
   final String publisher;
   final int inventory;
   bool isFavorate;

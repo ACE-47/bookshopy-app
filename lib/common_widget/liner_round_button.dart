@@ -31,7 +31,7 @@ class LinearRoundButton extends StatelessWidget {
             shadowColor: Colors.transparent),
         child: Text(
           title,
-          style: const TextStyle(fontSize: 12),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
         ),
       ),
     );

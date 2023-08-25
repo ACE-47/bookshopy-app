@@ -1,3 +1,4 @@
+import 'package:bookshopy_app/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 import '/screens/about_us/about_us_screen.dart';
 import '/screens/author/author_screen.dart';
@@ -20,5 +21,6 @@ final Map<String, WidgetBuilder> routes = {
   SearchForceScreen.routeName: (context) => const SearchForceScreen(),
   AboutUsScreen.routeName: (context) => AboutUsScreen(),
   AuthorScreen.routeName: (context) => const AuthorScreen(),
-  ProductDetailScreen.routeName: (context) => ProductDetailScreen()
+  ProductDetailScreen.routeName: (context) => const ProductDetailScreen(),
+  CartScreen.routeName: (context) => CartScreen(),
 };

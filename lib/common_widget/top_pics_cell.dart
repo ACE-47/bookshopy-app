@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import '../common/constants.dart';
 
 class TopPicsCell extends StatelessWidget {
-  const TopPicsCell(
-      {super.key, required this.img, required this.name, required this.author});
+  const TopPicsCell({
+    super.key,
+    required this.img,
+    required this.name,
+    required this.author,
+  });
 
   final String img;
   final String name;
@@ -31,7 +35,7 @@ class TopPicsCell extends StatelessWidget {
                     ]),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
+                  child: Image.network(
                     img,
                     fit: BoxFit.cover,
                     height: size.width * 0.45,
