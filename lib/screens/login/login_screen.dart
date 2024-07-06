@@ -43,33 +43,38 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               const SizedBox(height: 40),
               const LogInForm(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isStay = !isStay;
-                      });
-                    },
-                    icon: Icon(
-                      isStay ? Icons.check_box : Icons.check_box_outline_blank,
-                      color: isStay ? TColor.primary : TColor.subTitle,
-                    ),
-                  ),
-                  Text(
-                    'Remember me ',
+              SizedBox(
+                width: double.infinity,
+                // child: Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     IconButton(
+                //       onPressed: () {
+                //         setState(() {
+                //           isStay = !isStay;
+                //         });
+                //       },
+                //       icon: Icon(
+                //         isStay
+                //             ? Icons.check_box
+                //             : Icons.check_box_outline_blank,
+                //         color: isStay ? TColor.primary : TColor.subTitle,
+                //       ),
+                //     ),
+                //     Text(
+                //       'Remember me ',
+                //       style: TextStyle(fontSize: 17, color: TColor.subTitle),
+                //     ),
+                // const Spacer(),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Forget Your Password?',
                     style: TextStyle(fontSize: 17, color: TColor.subTitle),
                   ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forget Your Password?',
-                      style: TextStyle(fontSize: 17, color: TColor.subTitle),
-                    ),
-                  ),
-                ],
+                ),
+                // ],
+                // ),
               ),
             ],
           ),

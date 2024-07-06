@@ -1,5 +1,4 @@
 import 'package:bookshopy_app/screens/login/login_screen.dart';
-import 'package:bookshopy_app/screens/main_tab/main_tab_screen.dart';
 import 'package:bookshopy_app/screens/signup/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -65,15 +64,15 @@ class WelcomeScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  RoundButton(
-                    title: 'Guest',
-                    onPress: () {
-                      Navigator.pushNamed(
-                        context,
-                        MainTabScreen.routeName,
-                      );
-                    },
-                  ),
+                  // RoundButton(
+                  //   title: 'Guest',
+                  //   onPress: () {
+                  //     Navigator.pushNamed(
+                  //       context,
+                  //       MainTabScreen.routeName,
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),

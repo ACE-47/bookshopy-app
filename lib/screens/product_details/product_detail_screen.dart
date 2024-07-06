@@ -164,7 +164,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 onPress: () {
                                   //
                                   Provider.of<Cart>(context, listen: false)
-                                      .addToCart(productId, 1);
+                                      .addToCart(productId, null, 1);
                                 }),
                           ),
                           GestureDetector(

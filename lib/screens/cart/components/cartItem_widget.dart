@@ -1,6 +1,6 @@
-import 'package:bookshopy_app/provider/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/provider/cart.dart';
 
 import '../../../common/constants.dart';
 
@@ -55,7 +55,7 @@ class CartItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  cartItem.productTitle,
+                  cartItem.title,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -67,7 +67,7 @@ class CartItemWidget extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text.rich(
                   TextSpan(
-                      text: '\$${cartItem.productPrice}',
+                      text: '\$${cartItem.price}',
                       style: TextStyle(
                         color: TColor.primary,
                         fontWeight: FontWeight.w700,
@@ -76,7 +76,7 @@ class CartItemWidget extends StatelessWidget {
                       children: [
                         TextSpan(
                           // change it later with promotion
-                          text: '  \$${cartItem.productPrice}',
+                          text: '  \$${cartItem.price}',
                           style: TextStyle(
                             color: TColor.subTitle,
                             decoration: TextDecoration.lineThrough,
@@ -120,9 +120,9 @@ class CartItemWidget extends StatelessWidget {
                     try {
                       await Provider.of<CartItem>(context, listen: false)
                           .updateQuantity(
-                              cartItem.id, cartItem.quantity += 1, authTocken)
-                          .then((_) => Provider.of<Cart>(context, listen: false)
-                              .totalCartPriceFn());
+                              cartItem.id, cartItem.quantity += 1, authTocken);
+                      // .then((_) => Provider.of<Cart>(context, listen: false)
+                      //     .totalCartPriceFn());
                     } catch (error) {
                       //do error handler
                       print(error);
@@ -148,9 +148,9 @@ class CartItemWidget extends StatelessWidget {
                     try {
                       await Provider.of<CartItem>(context, listen: false)
                           .updateQuantity(
-                              cartItem.id, cartItem.quantity -= 1, authTocken)
-                          .then((_) => Provider.of<Cart>(context, listen: false)
-                              .totalCartPriceFn());
+                              cartItem.id, cartItem.quantity -= 1, authTocken);
+                      // .then((_) => Provider.of<Cart>(context, listen: false)
+                      //     .totalCartPriceFn());
                     } catch (error) {
                       print(error);
                     }

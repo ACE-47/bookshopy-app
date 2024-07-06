@@ -1,5 +1,5 @@
-import 'package:bookshopy_app/screens/signup/complete_signup/complete_form.dart';
 import 'package:flutter/material.dart';
+import '/screens/signup/complete_signup/complete_form.dart';
 
 import '../../../common/constants.dart';
 import '../../../common_widget/round_button.dart';

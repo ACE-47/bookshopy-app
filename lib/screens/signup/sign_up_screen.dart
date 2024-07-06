@@ -2,7 +2,6 @@ import 'package:bookshopy_app/common/constants.dart';
 import 'package:bookshopy_app/screens/signup/sign_up_form.dart';
 import 'package:flutter/material.dart';
 
-
 class SignUpScreen extends StatelessWidget {
   static const routeName = '/sign-up';
   const SignUpScreen({super.key});
@@ -36,6 +35,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               const SignUpForm(),
+              const SizedBox(height: 40),
             ],
           ),
         ),

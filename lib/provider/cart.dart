@@ -7,17 +7,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CartItem with ChangeNotifier {
   final int id;
-  final int productId;
-  final String productTitle;
-  final double productPrice;
+  final int? productID;
+  final int? packageID;
+  final String title;
+  final double price;
   int quantity;
   double totalPrice;
 
   CartItem({
     required this.id,
-    required this.productId,
-    required this.productTitle,
-    required this.productPrice,
+    required this.productID,
+    required this.packageID,
+    required this.title,
+    required this.price,
     required this.quantity,
     required this.totalPrice,
   });
@@ -36,7 +38,7 @@ class CartItem with ChangeNotifier {
     final oldQuantity = quantity;
     final oldTotalPrice = totalPrice;
     quantity = newQuantity;
-    totalPrice = productPrice * quantity;
+    totalPrice = price * quantity;
     notifyListeners();
 
     Uri url = Uri.parse(
@@ -72,6 +74,8 @@ class Cart with ChangeNotifier {
     return {..._items};
   }
 
+  String _cartID = '';
+
   // final String _cartId = '';
   // Future<String> get cartId async {
   //   return await checkCartId();
@@ -82,8 +86,8 @@ class Cart with ChangeNotifier {
   void totalCartPriceFn() {
     double total = 0.0;
     final a = _items['items'] as List<CartItem>;
-    for (var cartitem in a) {
-      total += cartitem.totalPrice;
+    for (var item in a) {
+      total += item.totalPrice;
     }
     totalCartPrice = total;
     notifyListeners();
@@ -100,47 +104,62 @@ class Cart with ChangeNotifier {
   //   return total;
   // }
 
-  Future<String> checkCartId() async {
-    final prefs = await SharedPreferences.getInstance();
-    var cartId = prefs.getString('cart_id');
+  Future<void> checkCartId() async {
+    // final prefs = await SharedPreferences.getInstance();
+    // var cartId = prefs.getString('cart_id');
 
-    if (cartId == null) {
-      Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/');
+    //
+    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/');
 
-      try {
-        final response = await http.post(url);
-        cartId = json.decode(response.body)['id'];
-        prefs.setString('cart_id', cartId!);
-        // print(response.body);
-        notifyListeners();
-      } catch (error) {
-        rethrow;
+    try {
+      final response = await http.get(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: 'JWT $authTocken',
+      }, url);
+
+      if (response.body.isEmpty) {
+        final response = await http.post(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader: 'JWT $authTocken',
+        }, url);
+
+        _cartID = json.decode(response.body)['id'];
+      } else {
+        _cartID = json.decode(response.body)['id'];
       }
+
+      // prefs.setString('cart_id', cartId!);
+      // print(response.body);
+      notifyListeners();
+    } catch (error) {
+      rethrow;
     }
-    return cartId;
+    // return _cartID;
   }
 
   Future<void> fetchAndSetCart() async {
-    var cartId = await checkCartId();
-    // if (cartId.isEmpty) {
+    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/$_cartID/');
+    await checkCartId();
 
-    // }
-    print(cartId);
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/$cartId/');
+    print(_cartID);
     final response = await http.get(url);
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     final List<CartItem> loadedItems = [];
     // print(extractedData);
     // _items['id'] = extractedData['id'];
     _items['total_cart_price'] = extractedData['total_cart_price'];
-    totalCartPrice =
-        _items['total_cart_price'] == 0 ? 0.0 : _items['total_cart_price'];
+
     for (var cartItem in extractedData['items']) {
       loadedItems.add(CartItem(
           id: cartItem['id'],
-          productId: cartItem['product']['id'],
-          productTitle: cartItem['product']['title'],
-          productPrice: cartItem['product']['unit_price'],
+          productID: cartItem['product']['id'],
+          packageID: cartItem['package']['id'],
+          title: cartItem['package_id'].isNull
+              ? cartItem['product']['title']
+              : cartItem['package']['title'],
+          price: cartItem['package_id'].isNull
+              ? cartItem['product']['unit_price']
+              : cartItem['package']['unit_price'],
           quantity: cartItem['quantity'],
           totalPrice: cartItem['total_price']));
     }
@@ -150,10 +169,11 @@ class Cart with ChangeNotifier {
     // print(a);
   }
 
-  Future<void> addToCart(int productId, int quantity) async {
-    final cartId = await checkCartId();
-    print(cartId);
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/$cartId/items/');
+  Future<void> addToCart(int? productId, int? packageId, int quantity) async {
+    await checkCartId();
+    // print(_cartID);
+    Uri url =
+        Uri.parse('http://192.168.31.34:8000/store/carts/$_cartID/items/');
     if (quantity == 0) {
       return;
     }
@@ -165,28 +185,37 @@ class Cart with ChangeNotifier {
           },
           body: json.encode({
             'product_id': productId,
+            'package_id': packageId,
             'quantity': quantity,
           }));
-      print(response.body);
+      // print(response.body);
       notifyListeners();
     } catch (error) {
       rethrow;
     }
   }
 
-  Future<void> placeOrder() async {
-    final cartId = await checkCartId();
+  Future<void> placeOrder(Map<String, String> address) async {
+    await checkCartId();
     Uri url = Uri.parse('http://192.168.31.34:8000/store/orders/');
     try {
-      final response = await http.post(headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: 'JWT $authTocken',
-      }, url, body: json.encode({"cart_id": cartId}));
+      final response = await http.post(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: 'JWT $authTocken',
+          },
+          url,
+          body: json.encode({
+            "cart_id": _cartID,
+            "address": address,
+          }));
 
-      totalCartPrice = 0.0;
-      final prefs = await SharedPreferences.getInstance();
+      // totalCartPrice = 0.0;
+      // final prefs = await SharedPreferences.getInstance();
       // prefs.setString('cart_id', '');
-      _items.clear();
+      if (response.statusCode >= 200) {
+        _items.clear();
+      }
       notifyListeners();
     } catch (error) {
       rethrow;

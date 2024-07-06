@@ -60,7 +60,7 @@ class CheckoutCartButton extends StatelessWidget {
                   elevation: 2,
                   backgroundColor: TColor.primary),
               onPressed: () async {
-                await cart.placeOrder();
+                // await cart.placeOrder();
               },
               child: const Text(
                 textAlign: TextAlign.center,

@@ -21,7 +21,7 @@ class _LogInFormState extends State<LogInForm> {
   String email = '';
   String password = '';
 
-  final List<String> errors = ['Demo Error'];
+  final List<String> errors = [];
   //change that way of handler errors
   void addError({required String error}) {
     if (!errors.contains(error)) {

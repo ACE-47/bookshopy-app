@@ -51,21 +51,23 @@ const String kAddressNullError = "Please Enter your address";
 
 InputDecoration inputDecorationStyle(String text, Widget icon) {
   return InputDecoration(
-      suffixIcon: IconButton(
-        onPressed: () {},
-        icon: icon,
-      ),
-      // floatingLabelBehavior: FloatingLabelBehavior
-      //     .always, //flow label and it will not work if we add this in theme file
-      contentPadding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
-      focusedBorder: InputBorder.none,
-      enabledBorder: InputBorder.none,
-      errorBorder: InputBorder.none,
-      labelText: text,
-      labelStyle: const TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
-      ));
+    suffixIcon: IconButton(
+      onPressed: () {},
+      icon: icon,
+    ),
+    // floatingLabelBehavior: FloatingLabelBehavior.always,
+    //     .always, //flow label and it will not work if we add this in theme file
+    contentPadding: const EdgeInsets.symmetric(horizontal: 35, vertical: 16),
+    focusedBorder: InputBorder.none,
+    enabledBorder: InputBorder.none,
+    errorBorder: InputBorder.none,
+    focusedErrorBorder: InputBorder.none,
+    labelText: text,
+    labelStyle: const TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w500,
+    ),
+  );
 }
 
 // OutlineInputBorder outlineInputBorder() {

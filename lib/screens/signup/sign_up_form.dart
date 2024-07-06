@@ -24,7 +24,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String lastName = '';
   String userName = '';
 
-  final List<String> errors = ['Demo Error'];
+  final List<String> errors = [];
 
   void addError({required String error}) {
     if (!errors.contains(error)) {
