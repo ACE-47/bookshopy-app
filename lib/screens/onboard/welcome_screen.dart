@@ -1,5 +1,8 @@
 import 'package:bookshopy_app/screens/login/login_screen.dart';
+<<<<<<< HEAD
 import 'package:bookshopy_app/screens/main_tab/main_tab_screen.dart';
+=======
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 import 'package:bookshopy_app/screens/signup/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 20),
+<<<<<<< HEAD
                   RoundButton(
                     title: 'Guest',
                     onPress: () {
@@ -74,6 +78,17 @@ class WelcomeScreen extends StatelessWidget {
                       );
                     },
                   ),
+=======
+                  // RoundButton(
+                  //   title: 'Guest',
+                  //   onPress: () {
+                  //     Navigator.pushNamed(
+                  //       context,
+                  //       MainTabScreen.routeName,
+                  //     );
+                  //   },
+                  // ),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
                 ],
               ),
             ),

@@ -1,4 +1,10 @@
 import 'package:bookshopy_app/screens/cart/cart_screen.dart';
+<<<<<<< HEAD
+=======
+import 'package:bookshopy_app/screens/home/home_screen.dart';
+import 'package:bookshopy_app/screens/order/components/order_detail_screen.dart';
+import 'package:bookshopy_app/screens/order/orders_screen.dart';
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 import 'package:flutter/material.dart';
 import '/screens/about_us/about_us_screen.dart';
 import '/screens/author/author_screen.dart';
@@ -12,6 +18,10 @@ import '/screens/signup/complete_signup/complete_signup_screen.dart';
 import '/screens/signup/sign_up_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
+<<<<<<< HEAD
+=======
+  HomeScreen.routeName: (context) => const HomeScreen(),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
   WelcomeScreen.routeName: (context) => const WelcomeScreen(),
   LogInScreen.routeName: (context) => const LogInScreen(),
@@ -22,5 +32,11 @@ final Map<String, WidgetBuilder> routes = {
   AboutUsScreen.routeName: (context) => AboutUsScreen(),
   AuthorScreen.routeName: (context) => const AuthorScreen(),
   ProductDetailScreen.routeName: (context) => const ProductDetailScreen(),
+<<<<<<< HEAD
   CartScreen.routeName: (context) => CartScreen(),
+=======
+  CartScreen.routeName: (context) => const CartScreen(),
+  OrdersScreen.routeName: (context) => const OrdersScreen(),
+  OrderDetailScreen.routeName: (context) => const OrderDetailScreen(),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 };

@@ -1,10 +1,20 @@
 import 'package:bookshopy_app/common/constants.dart';
+<<<<<<< HEAD
 import 'package:bookshopy_app/screens/about_us/about_us_screen.dart';
 import 'package:bookshopy_app/screens/home/home_screen.dart';
 import 'package:bookshopy_app/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../cart/cart_screen.dart';
+=======
+import 'package:bookshopy_app/screens/main_tab/components/app_drawer.dart';
+import 'package:provider/provider.dart';
+
+// import '../../provider/cart.dart';
+// import '../../provider/orders.dart';
+import '../../provider/products.dart';
+import '../favorite/favorite_screen.dart';
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 class MainTabScreen extends StatefulWidget {
   static const routeName = '/main-tab';
@@ -19,6 +29,7 @@ GlobalKey<ScaffoldState> sideMenuScaffoldKey = GlobalKey<ScaffoldState>();
 class _MainTabScreenState extends State<MainTabScreen>
     with TickerProviderStateMixin {
   late TabController controller;
+<<<<<<< HEAD
   int selectedPage = 0;
 
   List menuArr = [
@@ -31,14 +42,26 @@ class _MainTabScreenState extends State<MainTabScreen>
     {"name": "Pop-up Leasing", "icon": Icons.open_in_new},
     {"name": "Account", "icon": Icons.account_circle}
   ];
+=======
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
   @override
   void initState() {
     controller = TabController(length: 4, vsync: this);
+<<<<<<< HEAD
+=======
+    Provider.of<Products>(context, listen: false).fetchAndSetFrontProducts();
+    Provider.of<Products>(context, listen: false).fetchAndSetProducts();
+    Provider.of<Products>(context, listen: false).fetchAndSetFavoriteProduct();
+
+    // Provider.of<Cart>(context, listen: false).fetchAndSetCart();
+    // Provider.of<Orders>(context, listen: false).fetchAndSetOrders();
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     // TODO: implement initState
     super.initState();
   }
 
+<<<<<<< HEAD
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -170,6 +193,28 @@ class _MainTabScreenState extends State<MainTabScreen>
         const HomeScreen(),
         const SearchScreen(),
         Container(),
+=======
+  // @override
+  // void dispose() {
+  //   sideMenuScaffoldKey.currentState!.deactivate();
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: sideMenuScaffoldKey,
+      endDrawer: AppDrawer(
+        // sideMenuScaffoldKey: sideMenuScaffoldKey,
+        selectedPage: 0,
+      ),
+      backgroundColor: Colors.white,
+      body: TabBarView(controller: controller, children: const [
+        HomeScreen(),
+        SearchScreen(),
+        FavoriteScreen(),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
         CartScreen(),
       ]),
       bottomNavigationBar: BottomAppBar(
@@ -189,8 +234,13 @@ class _MainTabScreenState extends State<MainTabScreen>
                   text: 'Search',
                 ),
                 Tab(
+<<<<<<< HEAD
                   icon: Icon(Icons.menu),
                   text: 'WishList',
+=======
+                  icon: Icon(Icons.favorite_sharp),
+                  text: 'Favorate',
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
                 ),
                 Tab(
                   icon: Icon(Icons.shopping_bag),

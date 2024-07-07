@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 import 'package:bookshopy_app/screens/signup/complete_signup/complete_form.dart';
 import 'package:flutter/material.dart';
+=======
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 import '../../../common/constants.dart';
-import '../../../common_widget/round_button.dart';
 
 class CompleteSignUpScreen extends StatelessWidget {
   static const routeName = '/complete-sign-up';

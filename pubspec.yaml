@@ -40,6 +40,11 @@ dependencies:
   http: ^1.1.0
   carousel_slider: ^4.2.1
   flutter_rating_bar: ^4.0.1
+<<<<<<< HEAD
+=======
+  shared_preferences: ^2.2.0
+
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +71,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/img/
+<<<<<<< HEAD
+=======
+  #   - images/a_dot_burr.jpeg
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

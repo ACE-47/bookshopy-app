@@ -1,10 +1,13 @@
 import 'package:bookshopy_app/common/constants.dart';
+<<<<<<< HEAD
 import 'package:bookshopy_app/screens/signup/complete_signup/complete_signup_screen.dart';
 import 'package:bookshopy_app/screens/signup/sign_up_form.dart';
 import 'package:flutter/material.dart';
 
-import '../../common_widget/round_button.dart';
 
+=======
+
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 class SignUpScreen extends StatelessWidget {
   static const routeName = '/sign-up';
   const SignUpScreen({super.key});
@@ -38,6 +41,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               const SignUpForm(),
+<<<<<<< HEAD
               const SizedBox(
                 height: 15,
               ),
@@ -48,6 +52,9 @@ class SignUpScreen extends StatelessWidget {
                   Navigator.pushNamed(context, CompleteSignUpScreen.routeName);
                 },
               )
+=======
+              const SizedBox(height: 40),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
             ],
           ),
         ),

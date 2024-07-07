@@ -76,8 +76,13 @@ class _CompleteFormState extends State<CompleteForm> {
             }
             return null;
           },
+<<<<<<< HEAD
           decoration: inputDecorationStyle('Mobile Phone')),
-    );
+=======
+          decoration:
+              inputDecorationStyle('Mobile Phone', const Icon(Icons.numbers))),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
+    )
   }
 
   Container buildDateFormField() {
@@ -100,7 +105,12 @@ class _CompleteFormState extends State<CompleteForm> {
             }
             return null;
           },
+<<<<<<< HEAD
           decoration: inputDecorationStyle('DateTime')),
-    );
+=======
+          decoration: inputDecorationStyle('DateTime',
+              IconButton(onPressed: () {}, icon: const Icon(Icons.calendar_today)))),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
+    )
   }
 }

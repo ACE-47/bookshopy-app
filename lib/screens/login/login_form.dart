@@ -1,7 +1,14 @@
 import 'package:bookshopy_app/common/form_error.dart';
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 
 import '../../common/constants.dart';
+=======
+import 'package:bookshopy_app/provider/auth.dart';
+
+import 'package:provider/provider.dart';
+
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 class LogInForm extends StatefulWidget {
   const LogInForm({super.key});
@@ -12,12 +19,21 @@ class LogInForm extends StatefulWidget {
 
 class _LogInFormState extends State<LogInForm> {
   final _keyForm = GlobalKey<FormState>();
+<<<<<<< HEAD
 
   String email = '';
 
   String password = '';
 
   final List<String> errors = ['Demo Error'];
+=======
+  bool _isLoading = false;
+
+  String email = '';
+  String password = '';
+
+  final List<String> errors = [];
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   //change that way of handler errors
   void addError({required String error}) {
     if (!errors.contains(error)) {
@@ -35,6 +51,35 @@ class _LogInFormState extends State<LogInForm> {
     }
   }
 
+<<<<<<< HEAD
+=======
+  void _submit() async {
+    if (!_keyForm.currentState!.validate()) {
+      return;
+    }
+
+    errors.clear();
+
+    _keyForm.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await Provider.of<Auth>(context, listen: false).logIn(email, password);
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+
+      errors.add(error.toString());
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   /////////
   //.......
   @override
@@ -53,9 +98,21 @@ class _LogInFormState extends State<LogInForm> {
             height: 40,
           ),
           FormError(error: errors),
+<<<<<<< HEAD
           const SizedBox(
             height: 20,
           )
+=======
+          const SizedBox(height: 50),
+          _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : RoundOutlineButton(
+                  title: 'Log In',
+                  onPress: () async {
+                    _submit();
+                  },
+                )
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
         ],
       ),
     );
@@ -88,8 +145,13 @@ class _LogInFormState extends State<LogInForm> {
             }
             return null;
           },
+<<<<<<< HEAD
           decoration: inputDecorationStyle('enter your Password')),
-    );
+=======
+          decoration: inputDecorationStyle(
+              'enter your Password', const Icon(Icons.password_outlined))),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
+    )
   }
 
   Container buildEmailFormField() {
@@ -118,7 +180,12 @@ class _LogInFormState extends State<LogInForm> {
           }
           return null;
         },
+<<<<<<< HEAD
         decoration: inputDecorationStyle('enter your email'),
+=======
+        decoration: inputDecorationStyle(
+            'enter your email', const Icon(Icons.email_outlined)),
+>>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
       ),
     );
   }
