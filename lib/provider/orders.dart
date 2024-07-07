@@ -48,7 +48,7 @@ class Orders with ChangeNotifier {
   final String authTocken;
 
   Future<void> fetchAndSetOrders() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/orders/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/orders/');
     try {
       final response = await http.get(headers: {
         HttpHeaders.contentTypeHeader: "application/json",

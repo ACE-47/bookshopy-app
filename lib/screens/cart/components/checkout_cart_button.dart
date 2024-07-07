@@ -1,4 +1,5 @@
 import 'package:bookshopy_app/provider/cart.dart';
+import 'package:bookshopy_app/screens/order/orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class CheckoutCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context);
+    final cart = Provider.of<Cart>(context, listen: false);
     final totalPrice = cart.totalCartPrice;
     return Container(
       width: double.infinity,
@@ -60,7 +61,22 @@ class CheckoutCartButton extends StatelessWidget {
                   elevation: 2,
                   backgroundColor: TColor.primary),
               onPressed: () async {
-                // await cart.placeOrder();
+                //
+                //IMPORTANT make it screen or more space for user to enter address
+                //
+                try {
+                  await cart.placeOrder(
+                    {
+                      "capital": "Baghdad",
+                      "city": "Al-thaalba",
+                      "street": "Al-Thaalba Street",
+                      "more_info": "this is first location from mobile"
+                    },
+                  ).then((value) => Navigator.of(context)
+                      .pushReplacementNamed(OrdersScreen.routeName));
+                } catch (error) {
+                  print(error);
+                }
               },
               child: const Text(
                 textAlign: TextAlign.center,

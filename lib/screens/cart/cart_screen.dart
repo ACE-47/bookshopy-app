@@ -102,14 +102,15 @@ class _CartScreenState extends State<CartScreen> {
                     );
                   } else {
                     if (snapshot.error != null) {
+                      print(snapshot.error);
                       // show somthing
                       return const Center(
                         child: Text('something went wrong'),
                       );
                     } else {
-                      final cart = Provider.of<Cart>(context);
+                      final cart = Provider.of<Cart>(context, listen: false);
                       final cartsItems = cart.items['items'] as List<CartItem>;
-
+                      print(cartsItems);
                       return ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
@@ -121,6 +122,7 @@ class _CartScreenState extends State<CartScreen> {
                           value: cartsItems[index],
                           child: CartItemWidget(
                             authTocken: cart.authTocken,
+                            cartId: cart.cartId,
                             // cartItemId: cart.items['items'][index].id,
                             // img: img,
                             // price: cart.items['items'][index].productPrice,

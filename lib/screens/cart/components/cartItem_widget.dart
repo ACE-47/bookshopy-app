@@ -8,6 +8,7 @@ class CartItemWidget extends StatelessWidget {
   const CartItemWidget({
     super.key,
     required this.authTocken,
+    required this.cartId,
     // required this.img,
     // required this.price,
     // required this.title,
@@ -17,6 +18,7 @@ class CartItemWidget extends StatelessWidget {
 
   // final int cartItemId;
   final String authTocken;
+  final String cartId;
   final String img = 'assets/img/3.jpg';
   // final double price;
   // final String title;
@@ -41,8 +43,8 @@ class CartItemWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  img,
+                child: Image.network(
+                  'http://10.21.55.93:8000${cartItem.imgUrl}',
                   fit: BoxFit.contain,
                   // width: 100,
                 ),
@@ -118,9 +120,11 @@ class CartItemWidget extends StatelessWidget {
                     // amount += 1;
 
                     try {
-                      await Provider.of<CartItem>(context, listen: false)
-                          .updateQuantity(
-                              cartItem.id, cartItem.quantity += 1, authTocken);
+                      await cartItem.updateQuantity(cartId, cartItem.id,
+                          cartItem.quantity += 1, authTocken);
+                      // await Provider.of<CartItem>(context, listen: false)
+                      //     .updateQuantity(cartId, cartItem.id,
+                      //         cartItem.quantity += 1, authTocken);
                       // .then((_) => Provider.of<Cart>(context, listen: false)
                       //     .totalCartPriceFn());
                     } catch (error) {
@@ -146,9 +150,8 @@ class CartItemWidget extends StatelessWidget {
                   ),
                   onTap: () async {
                     try {
-                      await Provider.of<CartItem>(context, listen: false)
-                          .updateQuantity(
-                              cartItem.id, cartItem.quantity -= 1, authTocken);
+                      await cartItem.updateQuantity(cartId, cartItem.id,
+                          cartItem.quantity -= 1, authTocken);
                       // .then((_) => Provider.of<Cart>(context, listen: false)
                       //     .totalCartPriceFn());
                     } catch (error) {

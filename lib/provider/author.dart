@@ -25,7 +25,7 @@ class Authors with ChangeNotifier {
   }
 
   Future<void> fetchAndSetAuthors() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/authors/');
+    Uri url = Uri.parse('http:http://10.21.55.93:8000/store/authors/');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;

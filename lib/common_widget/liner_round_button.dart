@@ -12,6 +12,7 @@ class LinearRoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       height: 30.0,
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: TColor.button),

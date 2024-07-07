@@ -1,5 +1,7 @@
 import 'package:bookshopy_app/common/form_error.dart';
 import 'package:bookshopy_app/provider/auth.dart';
+// import 'package:bookshopy_app/screens/home/home_screen.dart';
+import 'package:bookshopy_app/screens/main_tab/main_tab_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +54,10 @@ class _LogInFormState extends State<LogInForm> {
     });
 
     try {
-      await Provider.of<Auth>(context, listen: false).logIn(email, password);
+      await Provider.of<Auth>(context, listen: false)
+          .logIn(email, password)
+          .then((value) => Navigator.of(context)
+              .pushReplacementNamed(MainTabScreen.routeName));
     } catch (error) {
       setState(() {
         _isLoading = false;

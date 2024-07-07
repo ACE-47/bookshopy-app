@@ -39,7 +39,7 @@ class Product with ChangeNotifier {
 
     notifyListeners();
 
-    Uri url = Uri.parse('http://10.21.140.45:8000/like/likedItem/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/like/likedItem/');
 
     try {
       final response = await http.post(

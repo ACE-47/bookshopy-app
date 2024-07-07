@@ -48,7 +48,7 @@ class Packages with ChangeNotifier {
   }
 
   Future<void> fetchPackages() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/packages/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/packages/');
 
     try {
       final response = await http.get(

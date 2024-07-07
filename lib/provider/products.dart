@@ -41,7 +41,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchAndSetFavoriteProduct() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/like/likedItem/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/like/likedItem/');
 
     try {
       final response = await http.get(headers: {
@@ -75,7 +75,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchAndSetFrontProducts() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/products_advertize/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/products_advertize/');
 
     try {
       final response = await http.get(url);
@@ -108,7 +108,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     Uri url = Uri.parse(
-        'http://192.168.31.34:8000/store/products/?ordering=-last_update');
+        'http://10.21.55.93:8000/store/products/?ordering=-last_update');
     try {
       final response = await http.get(url);
       final extractData = json.decode(response.body) as Map<String, dynamic>;
@@ -142,7 +142,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> setAndFetchCollections() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/collections/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/collections/');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;

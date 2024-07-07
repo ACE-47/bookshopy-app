@@ -11,6 +11,7 @@ class CartItem with ChangeNotifier {
   final int? packageID;
   final String title;
   final double price;
+  final String imgUrl;
   int quantity;
   double totalPrice;
 
@@ -20,6 +21,7 @@ class CartItem with ChangeNotifier {
     required this.packageID,
     required this.title,
     required this.price,
+    required this.imgUrl,
     required this.quantity,
     required this.totalPrice,
   });
@@ -31,18 +33,20 @@ class CartItem with ChangeNotifier {
   }
 
   Future<void> updateQuantity(
-      int cartItemId, int newQuantity, String authTocken) async {
-    final prefs = await SharedPreferences.getInstance();
-    final cartId = prefs.getString('cart_id');
+      String cartId, int cartItemId, int newQuantity, String authTocken) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // final cartId = prefs.getString('cart_id');
     //
+    // double price2 = (totalPrice / quantity);
+    // print(price2);
     final oldQuantity = quantity;
     final oldTotalPrice = totalPrice;
     quantity = newQuantity;
     totalPrice = price * quantity;
-    notifyListeners();
+    // notifyListeners();
 
     Uri url = Uri.parse(
-        'http://192.168.31.34:8000/store/carts/$cartId/items/$cartItemId/');
+        'http://10.21.55.93:8000/store/carts/$cartId/items/$cartItemId/');
     try {
       final response = await http.patch(url,
           headers: {
@@ -56,10 +60,12 @@ class CartItem with ChangeNotifier {
       if (response.statusCode >= 400) {
         setQuantity(oldQuantity, oldTotalPrice);
       }
+
       // notifyListeners();
     } catch (error) {
       setQuantity(oldQuantity, oldTotalPrice);
     }
+    notifyListeners();
   }
 }
 
@@ -75,7 +81,9 @@ class Cart with ChangeNotifier {
   }
 
   String _cartID = '';
-
+  String get cartId {
+    return _cartID;
+  }
   // final String _cartId = '';
   // Future<String> get cartId async {
   //   return await checkCartId();
@@ -109,23 +117,23 @@ class Cart with ChangeNotifier {
     // var cartId = prefs.getString('cart_id');
 
     //
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/carts/');
 
     try {
       final response = await http.get(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
         HttpHeaders.authorizationHeader: 'JWT $authTocken',
       }, url);
-
-      if (response.body.isEmpty) {
-        final response = await http.post(headers: {
+      // print(json.decode(response.body));
+      if (json.decode(response.body).isEmpty) {
+        final responseCart = await http.post(headers: {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.authorizationHeader: 'JWT $authTocken',
         }, url);
 
-        _cartID = json.decode(response.body)['id'];
+        _cartID = json.decode(responseCart.body)[0]['id'];
       } else {
-        _cartID = json.decode(response.body)['id'];
+        _cartID = json.decode(response.body)[0]['id'];
       }
 
       // prefs.setString('cart_id', cartId!);
@@ -138,11 +146,15 @@ class Cart with ChangeNotifier {
   }
 
   Future<void> fetchAndSetCart() async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/carts/$_cartID/');
     await checkCartId();
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/carts/$_cartID/');
 
     print(_cartID);
-    final response = await http.get(url);
+    final response = await http.get(headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.authorizationHeader: 'JWT $authTocken',
+    }, url);
+    print(json.decode(response.body));
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     final List<CartItem> loadedItems = [];
     // print(extractedData);
@@ -152,18 +164,24 @@ class Cart with ChangeNotifier {
     for (var cartItem in extractedData['items']) {
       loadedItems.add(CartItem(
           id: cartItem['id'],
-          productID: cartItem['product']['id'],
-          packageID: cartItem['package']['id'],
-          title: cartItem['package_id'].isNull
+          productID:
+              cartItem['product'] == null ? null : cartItem['product']['id'],
+          packageID:
+              cartItem['package'] == null ? null : cartItem['package']['id'],
+          title: cartItem['package_id'] == null
               ? cartItem['product']['title']
               : cartItem['package']['title'],
-          price: cartItem['package_id'].isNull
+          price: cartItem['package_id'] == null
               ? cartItem['product']['unit_price']
               : cartItem['package']['unit_price'],
+          imgUrl: cartItem['package_id'] == null
+              ? cartItem['product']['image']
+              : cartItem['package']['image'],
           quantity: cartItem['quantity'],
           totalPrice: cartItem['total_price']));
     }
     _items['items'] = loadedItems;
+    totalCartPrice = _items['total_cart_price'];
     notifyListeners();
     // CartItem a = _items['items'][0];
     // print(a);
@@ -172,8 +190,7 @@ class Cart with ChangeNotifier {
   Future<void> addToCart(int? productId, int? packageId, int quantity) async {
     await checkCartId();
     // print(_cartID);
-    Uri url =
-        Uri.parse('http://192.168.31.34:8000/store/carts/$_cartID/items/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/carts/$_cartID/items/');
     if (quantity == 0) {
       return;
     }
@@ -195,9 +212,9 @@ class Cart with ChangeNotifier {
     }
   }
 
-  Future<void> placeOrder(Map<String, String> address) async {
+  Future<void> placeOrder(Map<String, dynamic> address) async {
     await checkCartId();
-    Uri url = Uri.parse('http://192.168.31.34:8000/store/orders/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/store/orders/');
     try {
       final response = await http.post(
           headers: {
@@ -206,9 +223,12 @@ class Cart with ChangeNotifier {
           },
           url,
           body: json.encode({
-            "cart_id": _cartID,
-            "address": address,
+            'cart_id': _cartID,
+            'address': address,
           }));
+      print(_cartID);
+      print(address);
+      print(json.decode(response.body));
 
       // totalCartPrice = 0.0;
       // final prefs = await SharedPreferences.getInstance();

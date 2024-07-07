@@ -136,11 +136,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.spaceAro,
                         children: [
                           Flexible(
-                            flex: 7,
+                            flex: 3,
                             fit: FlexFit.tight,
                             child: Text(
                               // overflow: TextOverflow.ellipsis,
@@ -157,20 +158,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           //   width: 2,
                           // ),
                           Flexible(
-                            flex: 4,
-                            fit: FlexFit.loose,
+                            flex: 2,
+                            fit: FlexFit.tight,
                             child: LinearRoundButton(
                                 title: 'Add To Cart',
-                                onPress: () {
+                                onPress: () async {
                                   //
-                                  Provider.of<Cart>(context, listen: false)
+                                  await Provider.of<Cart>(context,
+                                          listen: false)
                                       .addToCart(productId, null, 1);
                                 }),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               //
-                              Provider.of<Product>(context, listen: false)
+                              await Provider.of<Product>(context, listen: false)
                                   .toggleFavorite(productId, auth.accessTocken);
                             },
                             child: Padding(

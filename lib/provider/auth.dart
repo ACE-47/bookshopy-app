@@ -79,7 +79,7 @@ class Auth with ChangeNotifier {
     required String firstName,
     required String lastName,
   }) async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/auth/users/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/auth/users/');
 
     try {
       final response = await http.post(
@@ -112,8 +112,44 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future<void> completeSignUp(String phoneNumber, DateTime birthDate) async {
+    final Uri url = Uri.parse('http://10.21.55.93:8000/store/customers/me/');
+
+    try {
+      final response = await http.get(
+        headers: header,
+        url,
+      );
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print(extractedData);
+      // error or bad Request while getting data
+      if (response.statusCode == HttpStatus.badRequest) {
+        throw extractedData;
+      }
+
+      // getting user info and send the complete custome data birthdate and phone number
+      final customerResponse = await http.put(
+          headers: header,
+          url,
+          body: json.encode({
+            "id": extractedData['id'],
+            "user_id": extractedData['user_id'],
+            "phone": phoneNumber.toString(),
+            "birth_date": birthDate.toIso8601String(),
+            "address": extractedData['address']
+          }));
+      final customerData =
+          json.decode(customerResponse.body) as Map<String, dynamic>;
+      if (customerResponse.statusCode == HttpStatus.badRequest) {
+        throw customerData;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<void> logIn(String userName, String password) async {
-    Uri url = Uri.parse('http://192.168.31.34:8000/auth/jwt/create/');
+    Uri url = Uri.parse('http://10.21.55.93:8000/auth/jwt/create/');
 
     try {
       final response = await http.post(

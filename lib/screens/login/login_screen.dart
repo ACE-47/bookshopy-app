@@ -12,7 +12,7 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  bool isStay = false;
+  // bool isStay = false;
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '/screens/signup/complete_signup/complete_form.dart';
 
 import '../../../common/constants.dart';
-import '../../../common_widget/round_button.dart';
 
 class CompleteSignUpScreen extends StatelessWidget {
   static const routeName = '/complete-sign-up';
@@ -37,16 +36,6 @@ class CompleteSignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               const CompleteForm(),
-              const SizedBox(
-                height: 15,
-              ),
-              RoundOutlineButton(
-                // ....
-                title: 'Sign Up',
-                onPress: () {
-                  // Navigator.pushNamed(context, CompleteSignUpScreen.routeName);
-                },
-              )
             ],
           ),
         ),
