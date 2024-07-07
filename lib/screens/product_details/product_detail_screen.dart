@@ -1,11 +1,8 @@
 import 'package:bookshopy_app/common_widget/liner_round_button.dart';
 import 'package:bookshopy_app/common_widget/product_list.dart';
-<<<<<<< HEAD
-=======
 import 'package:bookshopy_app/provider/auth.dart';
 import 'package:bookshopy_app/provider/cart.dart';
 import 'package:bookshopy_app/provider/product.dart';
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 import 'package:bookshopy_app/provider/products.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +45,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-<<<<<<< HEAD
-=======
     final auth = Provider.of<Auth>(context, listen: false);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     final productId = ModalRoute.of(context)!.settings.arguments as int;
     final product =
         Provider.of<Products>(context, listen: false).findById(productId);
@@ -60,11 +54,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         .suggestionProducts(product.collection);
 
     final authorWorks = Provider.of<Products>(context, listen: false)
-<<<<<<< HEAD
-        .AuthorProducts(product.author['id']);
-=======
         .authorProducts(product.author['id']);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -173,21 +163,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 title: 'Add To Cart',
                                 onPress: () {
                                   //
-<<<<<<< HEAD
-=======
                                   Provider.of<Cart>(context, listen: false)
                                       .addToCart(productId, null, 1);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
                                 }),
                           ),
                           GestureDetector(
                             onTap: () {
                               //
-<<<<<<< HEAD
-=======
                               Provider.of<Product>(context, listen: false)
                                   .toggleFavorite(productId, auth.accessTocken);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
                             },
                             child: Padding(
                               padding:

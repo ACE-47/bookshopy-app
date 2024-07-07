@@ -2,9 +2,6 @@ import 'package:bookshopy_app/screens/login/login_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/constants.dart';
-<<<<<<< HEAD
-=======
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 class LogInScreen extends StatefulWidget {
   static const routeName = '/log-in';
@@ -46,43 +43,6 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               const SizedBox(height: 40),
               const LogInForm(),
-<<<<<<< HEAD
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isStay = !isStay;
-                      });
-                    },
-                    icon: Icon(
-                      isStay ? Icons.check_box : Icons.check_box_outline_blank,
-                      color: isStay ? TColor.primary : TColor.subTitle,
-                    ),
-                  ),
-                  Text(
-                    'Remember me ',
-                    style: TextStyle(fontSize: 17, color: TColor.subTitle),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forget Your Password?',
-                      style: TextStyle(fontSize: 17, color: TColor.subTitle),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
-              RoundOutlineButton(
-                title: 'Log In',
-                onPress: () {
-                  //
-                },
-              )
-=======
               SizedBox(
                 width: double.infinity,
                 // child: Row(
@@ -116,7 +76,6 @@ class _LogInScreenState extends State<LogInScreen> {
                 // ],
                 // ),
               ),
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
             ],
           ),
         ),

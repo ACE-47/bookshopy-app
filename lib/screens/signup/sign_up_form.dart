@@ -1,15 +1,11 @@
 import 'package:bookshopy_app/common/form_error.dart';
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-
-import '../../common/constants.dart';
-=======
 import 'package:bookshopy_app/provider/auth.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/constants.dart';
 import '../../common_widget/round_button.dart';
 import 'complete_signup/complete_signup_screen.dart';
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -20,24 +16,15 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _keyForm = GlobalKey<FormState>();
-<<<<<<< HEAD
-=======
   bool _isLoading = false;
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
   String email = '';
   String password = '';
   String firstName = '';
   String lastName = '';
-<<<<<<< HEAD
-  String username = '';
-
-  final List<String> errors = ['Demo Error'];
-=======
   String userName = '';
 
   final List<String> errors = [];
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
   void addError({required String error}) {
     if (!errors.contains(error)) {
@@ -55,8 +42,6 @@ class _SignUpFormState extends State<SignUpForm> {
     }
   }
 
-<<<<<<< HEAD
-=======
   void _submit() async {
     if (!_keyForm.currentState!.validate()) {
       return;
@@ -94,7 +79,6 @@ class _SignUpFormState extends State<SignUpForm> {
     });
   }
 
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -102,17 +86,6 @@ class _SignUpFormState extends State<SignUpForm> {
       child: SingleChildScrollView(
           child: Column(
         children: [
-<<<<<<< HEAD
-          buildNameFormField(firstName, 'First Name'),
-          const SizedBox(
-            height: 15,
-          ),
-          buildNameFormField(lastName, 'Last Name'),
-          const SizedBox(
-            height: 15,
-          ),
-          buildNameFormField(username, 'User Name'),
-=======
           buildFirstNameFormField(),
           const SizedBox(
             height: 15,
@@ -122,7 +95,6 @@ class _SignUpFormState extends State<SignUpForm> {
             height: 15,
           ),
           buildUserNameFormField(),
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
           const SizedBox(
             height: 15,
           ),
@@ -134,9 +106,6 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(
             height: 15,
           ),
-<<<<<<< HEAD
-          FormError(error: errors)
-=======
           FormError(error: errors),
           const SizedBox(height: 15),
           RoundButton(
@@ -146,7 +115,6 @@ class _SignUpFormState extends State<SignUpForm> {
               _submit();
             },
           )
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
         ],
       )),
     );
@@ -177,13 +145,9 @@ class _SignUpFormState extends State<SignUpForm> {
             }
             return null;
           },
-<<<<<<< HEAD
-          decoration: inputDecorationStyle('Email Address')),
-=======
           decoration:
               inputDecorationStyle('Email Address', const Icon(Icons.email))),
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
-    )
+    );
   }
 
   Container buildPasswordFormField() {
@@ -212,39 +176,23 @@ class _SignUpFormState extends State<SignUpForm> {
             }
             return null;
           },
-<<<<<<< HEAD
-          decoration: inputDecorationStyle('your password')),
+          decoration: inputDecorationStyle(
+              'your password', const Icon(Icons.password_sharp))),
     );
   }
 
-  Container buildNameFormField(String name, String title) {
-=======
-          decoration: inputDecorationStyle(
-              'your password', const Icon(Icons.password_sharp))),
-    )
-  }
-
   Container buildUserNameFormField() {
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     return Container(
       decoration: BoxDecoration(
           color: TColor.textbox, borderRadius: BorderRadius.circular(30)),
       child: TextFormField(
           // keyboardType: TextInputType.emailAddress,
-<<<<<<< HEAD
-          onSaved: (newValue) => name = newValue!,
-=======
           onSaved: (newValue) => userName = newValue!,
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
           onChanged: (value) {
             if (value.isNotEmpty) {
               removeError(error: kNamelNullError);
             }
-<<<<<<< HEAD
-            name = value;
-=======
             userName = value;
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
             return;
           },
           validator: (value) {
@@ -254,12 +202,9 @@ class _SignUpFormState extends State<SignUpForm> {
             }
             return null;
           },
-<<<<<<< HEAD
-          decoration: inputDecorationStyle(title)),
-=======
           decoration: inputDecorationStyle(
               'UserName', const Icon(Icons.person_2_outlined))),
-    )
+    );
   }
 
   Container buildFirstNameFormField() {
@@ -311,7 +256,6 @@ class _SignUpFormState extends State<SignUpForm> {
           },
           decoration: inputDecorationStyle(
               'Last Name', const Icon(Icons.person_3_outlined))),
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     );
   }
 }

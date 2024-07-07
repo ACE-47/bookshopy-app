@@ -19,25 +19,17 @@ class Author {
 }
 
 class Authors with ChangeNotifier {
-  final List<Author> _authors = [];
+  List<Author> _authors = [];
   List<Author> get authors {
     return [..._authors];
   }
 
   Future<void> fetchAndSetAuthors() async {
-<<<<<<< HEAD
-    Uri url = Uri.parse('http://10.23.154.10:8000/store/authors/');
-    try {
-      final response = await http.get(url);
-      final extractedData = json.decode(response.body) as List<dynamic>;
-      print(response.body);
-=======
     Uri url = Uri.parse('http://192.168.31.34:8000/store/authors/');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;
       // print(response.body);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
       final List<Author> loadedData = [];
       extractedData
           .map((author) => loadedData.add(Author(
@@ -48,12 +40,8 @@ class Authors with ChangeNotifier {
                 imageUrl: author['author_image'],
               )))
           .toList();
-<<<<<<< HEAD
-      print(loadedData[0].name);
-=======
       // print(loadedData[0].name);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
-      authors = loadedData;
+      _authors = loadedData;
       notifyListeners();
     } catch (error) {
       rethrow;

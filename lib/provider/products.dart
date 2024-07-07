@@ -1,60 +1,45 @@
 import 'dart:convert';
-<<<<<<< HEAD
-=======
 import 'dart:io';
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '/provider/product.dart';
 
 class Products with ChangeNotifier {
-<<<<<<< HEAD
-  final List<Product> _items = [];
-  final List<Product> _frontItems = [];
-  final List<Product> _recentAdded = [];
-
-  List<Product> get item {
-=======
   final String authTocken;
 
   Products(this.authTocken);
 
 // items list products
-  List<Product> items = [];
-  List<Product> frontItems = [];
-  final List<Product> recentAdded = [];
+  List<Product> _items = [];
+  List<Product> _frontItems = [];
+  final List<Product> _recentAdded = [];
 
 // favorite item
-  List<Product> favorites = [];
+  List<Product> _favorites = [];
 
   List<Product> get favorites {
-    return [...favorites];
+    return [..._favorites];
   }
 
   List<Product> get item {
-    if (favorites.isNotEmpty) {}
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
-    return [...items];
+    if (_favorites.isNotEmpty) {}
+    return [..._items];
   }
 
   List<Product> get frontItems {
-    return [...frontItems];
+    return [..._frontItems];
   }
 
   List<Product> get recentAdded {
-    return [...recentAdded];
+    return [..._recentAdded];
   }
 
-  List<Collection> collections = [];
+  List<Collection> _collections = [];
   List<Collection> get collections {
-    return [...collections];
+    return [..._collections];
   }
 
-<<<<<<< HEAD
-  Future<void> fetchAndSetFrontProducts() async {
-    Uri url = Uri.parse('http://10.23.154.10:8000/store/products_advertize/');
-=======
   Future<void> fetchAndSetFavoriteProduct() async {
     Uri url = Uri.parse('http://192.168.31.34:8000/like/likedItem/');
 
@@ -81,7 +66,7 @@ class Products with ChangeNotifier {
           isFavorate: true,
         ));
       }
-      favorites = loadedData;
+      _favorites = loadedData;
       // print(_favorites);
       notifyListeners();
     } catch (error) {
@@ -91,7 +76,6 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetFrontProducts() async {
     Uri url = Uri.parse('http://192.168.31.34:8000/store/products_advertize/');
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 
     try {
       final response = await http.get(url);
@@ -108,16 +92,12 @@ class Products with ChangeNotifier {
           collection: product['product']['collection'],
           author: product['product']['auther'],
           publisher: product['product']['publisher']['name'],
-<<<<<<< HEAD
-          inventory: product['product']['inventory'],
-=======
           // inventory: product['product']['inventory'],
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
         ));
         // print(product);
       }
       // print(loadedData.length);
-      frontItems = loadedData;
+      _frontItems = loadedData;
       // print(_frontItems.length);
       notifyListeners();
     } catch (error) {
@@ -128,11 +108,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     Uri url = Uri.parse(
-<<<<<<< HEAD
-        'http://10.23.154.10:8000/store/products/?ordering=-last_update');
-=======
-        'http://192.168.31.34:8000/store/products/?ordering=-last_update')
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
+        'http://192.168.31.34:8000/store/products/?ordering=-last_update');
     try {
       final response = await http.get(url);
       final extractData = json.decode(response.body) as Map<String, dynamic>;
@@ -140,17 +116,6 @@ class Products with ChangeNotifier {
 
       for (var product in extractData['results']) {
         loadedData.add(Product(
-<<<<<<< HEAD
-            id: product['id'],
-            title: product['title'],
-            price: product['unit_price'],
-            description: product['descriptions'],
-            imageUrl: product['images'],
-            collection: product['collection'],
-            author: product['auther'],
-            publisher: product['publisher']['name'],
-            inventory: product['inventory']));
-=======
           id: product['id'],
           title: product['title'],
           price: product['unit_price'],
@@ -160,22 +125,16 @@ class Products with ChangeNotifier {
           author: product['auther'],
           publisher: product['publisher']['name'],
           // inventory: product['inventory']
-        ))
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
+        ));
         // print(product);
       }
-      items = loadedData;
+      _items = loadedData;
       for (var i = 0; i < 10; i++) {
-        recentAdded.add(items[i]);
+        _recentAdded.add(_items[i]);
       }
       // print(_items[0].id);
-<<<<<<< HEAD
-      print(recentAdded.length);
-      print(items.length);
-=======
       // print(_recentAdded.length);
       // print(_items.length);
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
       notifyListeners();
     } catch (error) {
       rethrow;
@@ -183,11 +142,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> setAndFetchCollections() async {
-<<<<<<< HEAD
-    Uri url = Uri.parse('http://10.23.154.10:8000/store/collections/');
-=======
     Uri url = Uri.parse('http://192.168.31.34:8000/store/collections/');
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;
@@ -197,7 +152,7 @@ class Products with ChangeNotifier {
               id: collection['collection']['id'],
               title: collection['collection']['title'])))
           .toList();
-      collections = loadedData;
+      _collections = loadedData;
       notifyListeners();
     } catch (error) {
       rethrow;
@@ -205,18 +160,14 @@ class Products with ChangeNotifier {
   }
 
   Product findById(int id) {
-    return items.firstWhere((prod) => prod.id == id);
+    return _items.firstWhere((prod) => prod.id == id);
   }
 
   List<Product> suggestionProducts(int collectionID) {
-    return [...items.where((prod) => prod.collection == collectionID)];
+    return [..._items.where((prod) => prod.collection == collectionID)];
   }
 
-<<<<<<< HEAD
-  List<Product> AuthorProducts(int authorId) {
-=======
   List<Product> authorProducts(int authorId) {
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
-    return [...items.where((prod) => prod.author['id'] == authorId)];
+    return [..._items.where((prod) => prod.author['id'] == authorId)];
   }
 }

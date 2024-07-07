@@ -12,10 +12,7 @@ import 'package:provider/provider.dart';
 import '../main_tab/main_tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-<<<<<<< HEAD
-=======
   static const routeName = '/home';
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   const HomeScreen({super.key});
 
   @override
@@ -80,12 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-<<<<<<< HEAD
-    Provider.of<Products>(context, listen: false).fetchAndSetFrontProducts();
-    Provider.of<Products>(context, listen: false).fetchAndSetProducts();
-
-=======
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
     // Provider.of<Authors>(context, listen: false).fetchAndSetAuthors();
     // TODO: implement initState
     super.initState();

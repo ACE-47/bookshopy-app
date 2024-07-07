@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-class Product {
-=======
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Product with ChangeNotifier {
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   final int id;
   final String title;
   final double price;
@@ -16,11 +12,7 @@ class Product with ChangeNotifier {
   final int collection; // change it idiot
   final Map<String, dynamic> author; // change it idiot
   final String publisher;
-<<<<<<< HEAD
-  final int inventory;
-=======
   // final int inventory;
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
   bool isFavorate;
 
   Product({
@@ -32,11 +24,6 @@ class Product with ChangeNotifier {
     required this.collection,
     required this.author,
     required this.publisher,
-<<<<<<< HEAD
-    required this.inventory,
-    this.isFavorate = false,
-  });
-=======
     // required this.inventory,
     this.isFavorate = false,
   });
@@ -78,7 +65,6 @@ class Product with ChangeNotifier {
       _setFavValue(oldStatus);
     }
   }
->>>>>>> 985cf0f9320e88052335fd1ee9fce1a693c413f8
 }
 
 class Collection {
